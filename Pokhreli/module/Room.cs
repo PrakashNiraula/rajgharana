@@ -108,7 +108,16 @@ namespace Pokhreli.module
 
         public DataTable getallRoomsbookedTobill()
         {
-            return db.GetDataTable("select * from room where bookedTo='" + billid + "'");
+            try{
+              var res=db.GetDataTable("select * from room where bookedTo='" + billid + "'");
+                var count = res.Rows.Count;
+                return res;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
 
         }
 

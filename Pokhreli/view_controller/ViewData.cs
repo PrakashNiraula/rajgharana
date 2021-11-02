@@ -168,6 +168,7 @@ namespace Pokhreli.view_controller
         {
 
             DataTable res2=null ;
+            
          
             int billid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
             string command = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();

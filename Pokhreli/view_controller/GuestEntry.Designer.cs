@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GuestEntry));
             this.bunifuMaterialTextbox1 = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
-            this.bunifuCustomLabel6 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.labeldate = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel13 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel4 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -101,15 +101,15 @@
             this.bunifuImageButton1.TabStop = false;
             this.bunifuImageButton1.Zoom = 10;
             // 
-            // bunifuCustomLabel6
+            // labeldate
             // 
-            this.bunifuCustomLabel6.AutoSize = true;
-            this.bunifuCustomLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel6.Location = new System.Drawing.Point(607, 108);
-            this.bunifuCustomLabel6.Name = "bunifuCustomLabel6";
-            this.bunifuCustomLabel6.Size = new System.Drawing.Size(209, 29);
-            this.bunifuCustomLabel6.TabIndex = 24;
-            this.bunifuCustomLabel6.Text = "Date: 2020/02/10";
+            this.labeldate.AutoSize = true;
+            this.labeldate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeldate.Location = new System.Drawing.Point(607, 108);
+            this.labeldate.Name = "labeldate";
+            this.labeldate.Size = new System.Drawing.Size(209, 29);
+            this.labeldate.TabIndex = 24;
+            this.labeldate.Text = "Date: 2020/02/10";
             // 
             // bunifuCustomLabel13
             // 
@@ -127,9 +127,9 @@
             this.bunifuCustomLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel4.Location = new System.Drawing.Point(657, 55);
             this.bunifuCustomLabel4.Name = "bunifuCustomLabel4";
-            this.bunifuCustomLabel4.Size = new System.Drawing.Size(139, 29);
+            this.bunifuCustomLabel4.Size = new System.Drawing.Size(153, 29);
             this.bunifuCustomLabel4.TabIndex = 22;
-            this.bunifuCustomLabel4.Text = "027421000";
+            this.bunifuCustomLabel4.Text = "9812190060";
             // 
             // bunifuCustomLabel5
             // 
@@ -444,6 +444,7 @@
             this.bunifuThinButton22.Size = new System.Drawing.Size(88, 40);
             this.bunifuThinButton22.TabIndex = 55;
             this.bunifuThinButton22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuThinButton22.Visible = false;
             this.bunifuThinButton22.Click += new System.EventHandler(this.bunifuThinButton22_Click);
             // 
             // bunifuMaterialTextbox5
@@ -593,7 +594,7 @@
             this.Controls.Add(this.bunifuCustomLabel8);
             this.Controls.Add(this.bunifuMaterialTextbox1);
             this.Controls.Add(this.bunifuImageButton1);
-            this.Controls.Add(this.bunifuCustomLabel6);
+            this.Controls.Add(this.labeldate);
             this.Controls.Add(this.bunifuCustomLabel13);
             this.Controls.Add(this.bunifuCustomLabel4);
             this.Controls.Add(this.bunifuCustomLabel5);
@@ -614,7 +615,7 @@
 
         private Bunifu.Framework.UI.BunifuMaterialTextbox bunifuMaterialTextbox1;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
-        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel6;
+        private Bunifu.Framework.UI.BunifuCustomLabel labeldate;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel13;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel4;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel5;

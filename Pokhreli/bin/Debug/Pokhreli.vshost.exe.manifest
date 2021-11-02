@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pokhreli.exe" size="501760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pokhreli.exe" size="529408">
       <assemblyIdentity name="Pokhreli" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Dhtn8ti+EBHcB9zO3VCz0SiFijcEbaMfltQ/qeqHZx4=</dsig:DigestValue>
+        <dsig:DigestValue>yQBzZJ+LBcN9iFY6z+WR34EzYRXS5UiNNrorREDTkow=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -19,6 +19,7 @@ namespace Pokhreli.module
         public string month;
         public string billid;
         public float newamount;
+        public string recentid;
         public billentry()
         {
             db = new dbConnection();
@@ -120,6 +121,32 @@ namespace Pokhreli.module
                 throw ex;
             }
             return 0;
+        }
+
+
+        public DataTable getrecentOrders()
+        {
+            try
+            {
+                return db.GetDataTable("select r.id as recent_id,gb.guest_name,p.name as product,r.quantity from guest_bill gb, recent r, myproducts p where r.billid=gb.id and r.productid=p.id");
+
+
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int deleteRecentbyId()
+        {
+           try
+            {
+                return db.ExecuteQuery("delete from recent where id='" + recentid + "' ");
+
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

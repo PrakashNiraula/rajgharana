@@ -29,6 +29,7 @@ namespace Pokhreli.view_controller
         string panorvat;
         DataTable emptytables;
         int tableid;
+        int guestentryid;
 
 
 
@@ -87,11 +88,12 @@ namespace Pokhreli.view_controller
 
         private async void GuestBill_Load(object sender, EventArgs e)
         {
+            labeldate.Text = "Date: " + DateTime.Now.ToString("yyyy-MM-dd");
             panel3.Visible = false;
             labelstatus.Visible = false;
             Task<DataTable> getallguest = new Task<DataTable>(ge.getallguests);
             getallguest.Start();
-            bunifuMaterialTextbox2.Visible = false;
+           // bunifuMaterialTextbox2.Visible = false;
             radioButton2.Checked = true;
 
 
@@ -204,23 +206,10 @@ namespace Pokhreli.view_controller
             else
             {
                 billtype = "Table";
-                number = bunifuMaterialTextbox2.Text;
+              
                 tableid = int.Parse(comboBox1.SelectedValue.ToString());
             }
 
-
-            //if (checkBox1.Checked == true)
-            //{
-            //    panorvat = bunifuCustomLabel3.Text;
-            //}
-            //if (checkBox2.Checked == true)
-            //{
-            //    panorvat = bunifuCustomLabel2.Text;
-            //}
-            //if(checkBox1.Checked != true && checkBox2.Checked != true)
-            //{
-            //    panorvat = bunifuCustomLabel3.Text;
-            //}
 
 
             //// saveBill();
@@ -242,35 +231,28 @@ namespace Pokhreli.view_controller
 
         }
 
-        private void bunifuThinButton23_Click(object sender, EventArgs e)
-        {
+        //private void bunifuThinButton23_Click(object sender, EventArgs e)
+        //{
 
          
-            if (radioButton1.Checked == true)
-            {
-                billtype = "Room";
-                number = comboBox1.Text;
+        //    if (radioButton1.Checked == true)
+        //    {
+        //        billtype = "Room";
+        //        number = comboBox1.Text;
 
 
-            }
-            else
-            {
-                billtype = "Table";
-                number = comboBox1.Text;
-            }
+        //    }
+        //    else
+        //    {
+        //        billtype = "Table";
+        //        number = comboBox1.Text;
+        //    }
 
-            //string panorvat;
-            //if (checkBox1.Checked == true)
-            //{
-            //    panorvat = bunifuCustomLabel3.Text;
-            //}else
-            //{
-            //    panorvat = bunifuCustomLabel2.Text;
-            //}
+          
 
-            PrintBill pb = new PrintBill(records, bunifuMaterialTextbox1.Text, billtype, textBox1.Text, advance.ToString(), number, bunifuCustomLabel5.Text, bunifuMaterialTextbox4.Text,vat.ToString(),tableid);
-            pb.ShowDialog();
-        }
+        //    PrintBill pb = new PrintBill(records, bunifuMaterialTextbox1.Text, billtype, textBox1.Text, advance.ToString(), number, bunifuCustomLabel5.Text, bunifuMaterialTextbox4.Text,vat.ToString(),tableid);
+        //    pb.ShowDialog();
+        //}
 
 
 
@@ -284,6 +266,7 @@ namespace Pokhreli.view_controller
 
                 bunifuMaterialTextbox1.Text = guestList.Rows[comboBox1.SelectedIndex]["guest_name"].ToString();
                 advance = float.Parse(guestList.Rows[comboBox1.SelectedIndex]["advance"].ToString());
+                guestentryId= guestList.Rows[comboBox1.SelectedIndex]["id"].ToString();
                 labeladvance.Text = advance.ToString();
 
 
@@ -291,6 +274,7 @@ namespace Pokhreli.view_controller
                 {
                     records.Rows.Clear();
                     dr["ID"] = 1;
+                    dr["product_id"] = 1;
                     dr["Particular"] = "Room";
                     dr["Rate"] = guestList.Rows[comboBox1.SelectedIndex]["rateofRoom"].ToString();
                     //subtract entry date to current date
@@ -342,7 +326,7 @@ namespace Pokhreli.view_controller
                 comboBox1.ValueMember = "id";
                 comboBox1.DisplayMember = "roomNumber";
                 bunifuCustomLabel20.Text = "Room no";
-                bunifuMaterialTextbox2.Visible = false;
+                //bunifuMaterialTextbox2.Visible = false;
                 comboBox1.Visible = true;
                 if (guestList.Rows.Count > 0)
                 {
@@ -381,7 +365,7 @@ namespace Pokhreli.view_controller
             {
                 bunifuMaterialTextbox1.Text = "";
                 bunifuCustomLabel20.Text = "Table no";
-                bunifuMaterialTextbox2.Visible = false;
+                //bunifuMaterialTextbox2.Visible = false;
                 comboBox1.Visible = true;
                 //load empty tables
                 comboBox1.DataSource = emptytables;
@@ -457,54 +441,45 @@ namespace Pokhreli.view_controller
         public bool saveBill()
         {
             //save to bill
-          
-
-            //if (billtype == "Room")
-            //{
-
-            //    be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','" + number + "','"+panorvat+"'); select last_insert_id();";
-            //    int res = be.insertdata();
 
 
-            //    int resss;
-            //    //add to bill_content and update amount
-            //    for (int j = 0; j < records.Rows.Count; j++)
-            //    {
-            //        be.insertquery = "insert into bill_content values(Null,'" + billid + "','" + records.Rows[j]["product_id"] + "','" + records.Rows[j]["quantity"] + "','" + records.Rows[j]["rate"] + "','" + records.Rows[j]["total"] + "')";
-            //        int ress = be.insertdata();
-            //        if (j != 0)
-            //        {
-            //            ingredients.product_id = int.Parse(records.Rows[j]["product_id"].ToString());
-            //            DataTable ingredientsforProduct = ingredients.ingredientforproduct();
+            if (billtype == "Room")
+            {
 
-            //            for (int i = 0; i < ingredientsforProduct.Rows.Count; i++)
-            //            {
-            //                string usedamount = ingredientsforProduct.Rows[i]["used_amount"].ToString();
-            //                string quantity = records.Rows[j]["Quantity"].ToString();
-            //                string totalused = (float.Parse(usedamount) * float.Parse(quantity)).ToString();
-            //                string ingredientid = ingredientsforProduct.Rows[i]["ingredient_id"].ToString();
-            //                be.updatequery = "update ingredients set amount=amount-'" + totalused + "', updated_on='" + DateTime.Now.ToString("yyyy-MM-dd") + "' where id='" + ingredientid + "'";
-            //                resss = be.updatedata();
+                be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','Ongoing " + number + "','"+guestentryId+"')";
+                int res = be.insertdata();
 
-            //            }
-            //        }
+                //add to bill_content and update amount
+                for (int j = 0; j < records.Rows.Count; j++)
+                {
+                    string prodid = records.Rows[j]["product_id"].ToString();
+                    be.insertquery = "insert into bill_content values(Null,'" + billid + "','" + records.Rows[j]["product_id"] + "','" + records.Rows[j]["quantity"] + "','" + records.Rows[j]["rate"] + "','" + records.Rows[j]["total"] + "')";
+                    int ress = be.insertdata();
+                    if (j > 0)
+                    {
+                        ingredients.product_id = int.Parse(records.Rows[j]["product_id"].ToString());
+                        DataTable ingredientsforProduct = ingredients.ingredientforproduct();
 
-            //    }
-            //    //empty rooms
-            //    int result;
-            //    room.billid = guestentryId;
-            //    DataTable roomsonbill = room.getallRoomsbookedTobill();
+                        for (int i = 0; i < ingredientsforProduct.Rows.Count; i++)
+                        {
+                            string usedamount = ingredientsforProduct.Rows[i]["used_amount"].ToString();
+                            string quantity = records.Rows[j]["Quantity"].ToString();
+                            string totalused = (float.Parse(usedamount) * float.Parse(quantity)).ToString();
+                            string ingredientid = ingredientsforProduct.Rows[i]["ingredient_id"].ToString();
+                            be.updatequery = "update ingredients set amount=amount-'" + totalused + "', updated_on='" + DateTime.Now.ToString("yyyy-MM-dd") + "' where id='" + ingredientid + "'";
+                            int resss = be.updatedata();
 
-            //    for (int i = 0; i < roomsonbill.Rows.Count; i++)
-            //    {
-            //        room.updatequery = "update room set status='Empty',bookedTo='0' where id='" + roomsonbill.Rows[i]["id"] + "'";
-            //        result = room.updateRoom();
-            //    }
-            //    //update guest entry
-            //    ge.entryId = guestentryId;
-            //    int result2 = ge.guestentryBilled();
+                        }
+                    }
 
-            //}
+                    
+                }
+
+
+
+
+
+            }
 
             if (billtype == "Table")
             {

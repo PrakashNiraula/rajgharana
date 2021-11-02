@@ -17,12 +17,14 @@ namespace Pokhreli.view_controller
         module.guestEntry ge;
         module.billentry be;
         module.expenses exp;
+        module.mytables tables;
         public Home()
         {
             InitializeComponent();
             ge = new module.guestEntry();
             be = new module.billentry();
             exp = new module.expenses();
+            tables = new module.mytables();
         }
 
         private async void Home_Load(object sender, EventArgs e)
@@ -87,11 +89,32 @@ namespace Pokhreli.view_controller
             bunifuTileButton5.LabelText = "Expense Today: " + total3;
 
 
+
+            Task<DataTable> alltables = new Task<DataTable>(tables.getalltables);
+            alltables.Start();
+            var result = await alltables;
+            totaltables.Text = "Total: " + result.Rows.Count;
+
+            Task<DataTable> emptytables = new Task<DataTable>(tables.getemptytables);
+            emptytables.Start();
+            var result2 = await emptytables;
+            emptytableslabel.Text = "Empty: "+result2.Rows.Count;
+            filledtables.Text = "Filled: " + (result.Rows.Count - result2.Rows.Count);
+
+
+
+
         }
 
         private void bunifuTileButton3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bunifuThinButton22_Click(object sender, EventArgs e)
+        {
+            NewOrders no = new NewOrders();
+            no.ShowDialog();
         }
     }
 }

@@ -125,6 +125,8 @@ namespace Pokhreli.view_controller
 
         private async void GuestEntry_Load(object sender, EventArgs e)
         {
+
+            labeldate.Text = "Date: "+DateTime.Now.ToString("yyyy-MM-dd");
             Task<string> fetchid = new Task<string>(ge.gethighestId);
             fetchid.Start();
             Task<DataTable> getallrooms = new Task<DataTable>(room.getemptyRooms);
@@ -192,8 +194,8 @@ namespace Pokhreli.view_controller
 
 
 
-            g.DrawString("Hotel Hamro Pokhareli", font, new SolidBrush(Color.Black), startx, starty);
-            g.DrawString("Hotel Hamro Pokhareli", font, new SolidBrush(Color.Black), offset2, starty);
+            g.DrawString("Hotel Rajgharana", font, new SolidBrush(Color.Black), startx, starty);
+            g.DrawString("Hotel Rajgharana", font, new SolidBrush(Color.Black), offset2, starty);
 
             g.DrawString("Guest Entry", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 80, starty + 30);
             g.DrawString("Guest Entry", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 80, starty + 30);
@@ -204,11 +206,11 @@ namespace Pokhreli.view_controller
 
 
 
-            g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset + 20);
-            g.DrawString("PAN NO: 0123456789", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 165, starty + offset + 20);
+            //g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset + 20);
+            //g.DrawString("PAN NO: 0123456789", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 165, starty + offset + 20);
 
-            g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 20);
-            g.DrawString("PAN NO: 0123456789", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 165, starty + offset + 20);
+            //g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 20);
+            //g.DrawString("PAN NO: 0123456789", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 165, starty + offset + 20);
 
             g.DrawString(bunifuCustomLabel5.Text, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset);
             //g.DrawString(lblnumber.Text, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset + 40);

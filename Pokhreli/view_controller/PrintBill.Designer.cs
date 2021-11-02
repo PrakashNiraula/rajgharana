@@ -32,10 +32,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblnumber = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Delete = new System.Windows.Forms.DataGridViewLinkColumn();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.labeladvance = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelstatus = new System.Windows.Forms.Label();
             this.bunifuThinButton22 = new Bunifu.Framework.UI.BunifuThinButton2();
             this.panel3 = new System.Windows.Forms.Panel();
             this.labelrate = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -64,13 +66,11 @@
             this.bunifuCustomLabel12 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.bunifuCustomLabel11 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel10 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel9 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel8 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.Delete = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -112,6 +112,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(858, 321);
             this.dataGridView1.TabIndex = 1;
             // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "";
+            this.Delete.Name = "Delete";
+            this.Delete.Text = "Delete";
+            this.Delete.UseColumnTextForLinkValue = true;
+            // 
             // printDocument1
             // 
             this.printDocument1.DocumentName = "Bill";
@@ -140,6 +147,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.labelstatus);
             this.panel2.Controls.Add(this.bunifuThinButton22);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.bunifuThinButton21);
@@ -161,7 +169,6 @@
             this.panel2.Controls.Add(this.bunifuCustomLabel12);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.bunifuCustomLabel11);
-            this.panel2.Controls.Add(this.bunifuCustomLabel3);
             this.panel2.Controls.Add(this.bunifuCustomLabel10);
             this.panel2.Controls.Add(this.bunifuCustomLabel9);
             this.panel2.Controls.Add(this.bunifuCustomLabel8);
@@ -172,6 +179,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1001, 776);
             this.panel2.TabIndex = 11;
+            // 
+            // labelstatus
+            // 
+            this.labelstatus.AutoSize = true;
+            this.labelstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelstatus.Location = new System.Drawing.Point(587, 149);
+            this.labelstatus.Name = "labelstatus";
+            this.labelstatus.Size = new System.Drawing.Size(164, 17);
+            this.labelstatus.TabIndex = 39;
+            this.labelstatus.Text = "Status: Billed on date";
             // 
             // bunifuThinButton22
             // 
@@ -480,9 +497,9 @@
             this.bunifuCustomLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel4.Location = new System.Drawing.Point(729, 95);
             this.bunifuCustomLabel4.Name = "bunifuCustomLabel4";
-            this.bunifuCustomLabel4.Size = new System.Drawing.Size(189, 24);
+            this.bunifuCustomLabel4.Size = new System.Drawing.Size(193, 24);
             this.bunifuCustomLabel4.TabIndex = 6;
-            this.bunifuCustomLabel4.Text = "Phone: 027-421000";
+            this.bunifuCustomLabel4.Text = "Phone: 9812190060";
             // 
             // lblbillno
             // 
@@ -523,16 +540,6 @@
             this.bunifuCustomLabel11.TabIndex = 13;
             this.bunifuCustomLabel11.Text = "Advance :";
             // 
-            // bunifuCustomLabel3
-            // 
-            this.bunifuCustomLabel3.AutoSize = true;
-            this.bunifuCustomLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel3.Location = new System.Drawing.Point(712, 124);
-            this.bunifuCustomLabel3.Name = "bunifuCustomLabel3";
-            this.bunifuCustomLabel3.Size = new System.Drawing.Size(206, 24);
-            this.bunifuCustomLabel3.TabIndex = 5;
-            this.bunifuCustomLabel3.Text = "PAN NO:  600079202";
-            // 
             // bunifuCustomLabel10
             // 
             this.bunifuCustomLabel10.AutoSize = true;
@@ -569,9 +576,9 @@
             this.bunifuCustomLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuCustomLabel1.Location = new System.Drawing.Point(293, 14);
             this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(444, 46);
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(347, 46);
             this.bunifuCustomLabel1.TabIndex = 3;
-            this.bunifuCustomLabel1.Text = "Hotel Hamro Pokhareli";
+            this.bunifuCustomLabel1.Text = "Hotel Rajgharana";
             // 
             // panel4
             // 
@@ -581,13 +588,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(858, 321);
             this.panel4.TabIndex = 0;
-            // 
-            // Delete
-            // 
-            this.Delete.HeaderText = "";
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "Delete";
-            this.Delete.UseColumnTextForLinkValue = true;
             // 
             // PrintBill
             // 
@@ -634,7 +634,6 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel12;
         private System.Windows.Forms.TextBox textBox1;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel11;
-        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel3;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel10;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel9;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel8;
@@ -657,5 +656,6 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel14;
         private Bunifu.Framework.UI.BunifuThinButton2 bunifuThinButton22;
         private System.Windows.Forms.DataGridViewLinkColumn Delete;
+        private System.Windows.Forms.Label labelstatus;
     }
 }

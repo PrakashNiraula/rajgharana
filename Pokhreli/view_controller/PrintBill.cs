@@ -38,6 +38,8 @@ namespace Pokhreli.view_controller
         module.myProducts mp;
         DataTable allproducts;
         module.mytables tables;
+        module.Room room;
+        module.guestEntry ge;
 
         public PrintBill(DataTable products,string name,string billtype,string description,string advance,string number,string billno,string servicecharge,string vat,int tableid)
         {
@@ -56,6 +58,8 @@ namespace Pokhreli.view_controller
             mp = new module.myProducts();
             be = new module.billentry();
             tables = new module.mytables();
+            room = new module.Room();
+            ge = new module.guestEntry();
 
         }
 
@@ -68,7 +72,7 @@ namespace Pokhreli.view_controller
 
             }else
             {
-                lblnumber.Text = "Table no:" + number;
+                lblnumber.Text = "Table no: " +name ;
             }
             lbldate.Text = "Date "+DateTime.Now.ToString("yyyy-MM-dd");
             lblcusname.Text = name;
@@ -90,6 +94,15 @@ namespace Pokhreli.view_controller
             comboBox2.ValueMember = "id";
             comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+
+
+            labelstatus.Text = "Status: " + number;
+            if(number=="Checked out")
+            {
+                bunifuThinButton22.Visible = false;
+                bunifuThinButton21.Visible = false;
+            }
 
 
         }
@@ -145,44 +158,44 @@ namespace Pokhreli.view_controller
 
             // e.Graphics.DrawLine(new Pen(Color.Black), offset2-65, 0, offset2-65, 1200);
 
-            int y = 0;
+            //int y = 0;
 
-            using (Pen dashed_pen = new Pen(Color.Black, 2))
-            {
+            //using (Pen dashed_pen = new Pen(Color.Black, 2))
+            //{
 
-                dashed_pen.DashStyle = DashStyle.Dash;
-                e.Graphics.DrawLine(dashed_pen, offset2 - 65, 0, offset2 - 65, 1200);
-              //  y += 2;
+            //    dashed_pen.DashStyle = DashStyle.Dash;
+            //    e.Graphics.DrawLine(dashed_pen, offset2 - 65, 0, offset2 - 65, 1200);
+            //  //  y += 2;
 
-            }
+            //}
 
 
 
-            g.DrawString("Hotel Hamro Pokhareli", font, new SolidBrush(Color.Black), startx, starty);
-            g.DrawString("Hotel Hamro Pokhareli", font, new SolidBrush(Color.Black), offset2, starty);
+            g.DrawString("Hotel Rajgharana", font, new SolidBrush(Color.Black), startx+200, starty);
+            //g.DrawString("Hotel Rajgharana", font, new SolidBrush(Color.Black), offset2, starty);
 
-            g.DrawString("Invoice", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+80, starty+30);
-            g.DrawString("Invoice", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 80, starty + 30);
+            g.DrawString("Invoice", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+80+200, starty+30);
+           // g.DrawString("Invoice", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 80, starty + 30);
            
 
-            g.DrawString("Date: "+DateTime.Now.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+130, starty+offset);
-            g.DrawString("Date: " + DateTime.Now.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2+130, starty + offset);
+            g.DrawString("Date: "+DateTime.Now.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+130+370, starty+offset);
+//g.DrawString("Date: " + DateTime.Now.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2+130, starty + offset);
 
 
 
-            g.DrawString("Phone: 027-421026" , new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx-50, starty + offset+20);
+            g.DrawString("Phone: 9812190060" , new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx-50, starty + offset+20);
            // g.DrawString(panorvat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+165, starty + offset + 20);
 
-            g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 20);
+          //  g.DrawString("Phone: 027-421026", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 20);
            // g.DrawString(panorvat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 165, starty + offset + 20);
 
-            g.DrawString(billno, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset);
+            g.DrawString("Bill no: "+billno, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset);
             g.DrawString(lblnumber.Text, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 50, starty + offset + 40);
             g.DrawString("Name: " + name, new Font("Times New Roman", 14), new SolidBrush(Color.Black), startx - 50, starty + offset + 60);
 
-            g.DrawString(billno, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset);
-            g.DrawString(lblnumber.Text, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 40);
-            g.DrawString("Name: " + name, new Font("Times New Roman", 14), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 60);
+            //g.DrawString(billno, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset);
+            //g.DrawString(lblnumber.Text, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 40);
+            //g.DrawString("Name: " + name, new Font("Times New Roman", 14), new SolidBrush(Color.Black), offset2 - 50, starty + offset + 60);
 
 
 
@@ -191,35 +204,35 @@ namespace Pokhreli.view_controller
 
             ////id,particular,rate,qty,total
 
-            g.DrawString("ID", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx - 60, starty + offset + 90);
-            g.DrawString("Particular", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx , starty + offset + 90);
-            g.DrawString("Rate", new Font("Times New Roman", 12),new SolidBrush(Color.Black), startx +150, starty + offset + 90);
-            g.DrawString("Qty", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 200, starty + offset + 90);
-            g.DrawString("Total", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 250, starty + offset + 90);
+            g.DrawString("ID", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx, starty + offset + 90);
+            g.DrawString("Particular", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx+150 , starty + offset + 90);
+            g.DrawString("Rate", new Font("Times New Roman", 12),new SolidBrush(Color.Black), startx +150+200, starty + offset + 90);
+            g.DrawString("Qty", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 200+250, starty + offset + 90);
+            g.DrawString("Total", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 250+350, starty + offset + 90);
 
 
-            g.DrawString("ID", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 60, starty + offset + 90);
-            g.DrawString("Particular", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2, starty + offset + 90);
-            g.DrawString("Rate", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 150, starty + offset + 90);
-            g.DrawString("Qty", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 200, starty + offset + 90);
-            g.DrawString("Total", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 250, starty + offset + 90);
+            //g.DrawString("ID", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 - 60, starty + offset + 90);
+            //g.DrawString("Particular", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2, starty + offset + 90);
+            //g.DrawString("Rate", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 150, starty + offset + 90);
+            //g.DrawString("Qty", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 200, starty + offset + 90);
+            //g.DrawString("Total", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 250, starty + offset + 90);
 
             for (int i = 0; i < products.Rows.Count; i++)
             {
                 off = (i * 20) + 30;
 
-                g.DrawString(products.Rows[i]["ID"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx - 60, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Particular"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Rate"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 150, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Quantity"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 200, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Total"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 250, starty + offset + 100 + off);
+                g.DrawString(products.Rows[i]["ID"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx , starty + offset + 100 + off);
+                g.DrawString(products.Rows[i]["Particular"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx+150, starty + offset + 100 + off);
+                g.DrawString(products.Rows[i]["Rate"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 150+200, starty + offset + 100 + off);
+                g.DrawString(products.Rows[i]["Quantity"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 200+250, starty + offset + 100 + off);
+                g.DrawString(products.Rows[i]["Total"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), startx + 250+350, starty + offset + 100 + off);
 
 
-                g.DrawString(products.Rows[i]["ID"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 - 60, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Particular"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Rate"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 150, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Quantity"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 200, starty + offset + 100 + off);
-                g.DrawString(products.Rows[i]["Total"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 250, starty + offset + 100 + off);
+                //g.DrawString(products.Rows[i]["ID"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 - 60, starty + offset + 100 + off);
+                //g.DrawString(products.Rows[i]["Particular"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2, starty + offset + 100 + off);
+                //g.DrawString(products.Rows[i]["Rate"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 150, starty + offset + 100 + off);
+                //g.DrawString(products.Rows[i]["Quantity"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 200, starty + offset + 100 + off);
+                //g.DrawString(products.Rows[i]["Total"].ToString(), new Font("Times New Roman", 10), new SolidBrush(Color.Black), offset2 + 250, starty + offset + 100 + off);
 
 
               
@@ -227,27 +240,27 @@ namespace Pokhreli.view_controller
             }
 
             g.DrawString("...................................................................................................................................................................................................................................................................................", new Font("Times New Roman", 15), new SolidBrush(Color.Black), startx - 200, starty + offset + off+110);
-            g.DrawString("Total: " + "Nrs " + total.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 180, starty + offset + off + 130);
-            g.DrawString("VAT(in Nrs):" + vat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 110, starty + offset + off + 150);
-            g.DrawString("Service Charge(in Nrs):" + servicecharge, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 110, starty + offset + off + 170);
+            g.DrawString("Total: " + "Nrs " + total.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 130);
+            g.DrawString("VAT(in Nrs):" + vat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 150);
+            g.DrawString("Service Charge(in Nrs):" + servicecharge, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 170);
 
-            g.DrawString("Total: " + "Nrs " + total.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 180, starty + offset + off + 130);
-            g.DrawString("VAT(in Nrs): Nrs " + vat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 110, starty + offset + off + 150);
-            g.DrawString("Service Charge(in Nrs): Nrs " + servicecharge, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 110, starty + offset + off + 170);
+            //g.DrawString("Total: " + "Nrs " + total.ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 180, starty + offset + off + 130);
+            //g.DrawString("VAT(in Nrs): Nrs " + vat, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 110, starty + offset + off + 150);
+            //g.DrawString("Service Charge(in Nrs): Nrs " + servicecharge, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 110, starty + offset + off + 170);
 
 
 
             if (billtype == "Room")
             {
-                g.DrawString("Advance: Nrs " + advance, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 155, starty + offset + off + 190);
-                 g.DrawString("Final Total: Nrs "+final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 140, starty + offset + off + 210);
-                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 50, starty + offset + off + 250);
+                g.DrawString("Advance: Nrs " + advance, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 190);
+                 g.DrawString("Final Total: Nrs "+final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 210);
+                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 450, starty + offset + off + 250);
 
 
 
-                g.DrawString("Advance: Nrs " + advance, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 190);
-                g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 210);
-                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 90, starty + offset + off + 250);
+                //g.DrawString("Advance: Nrs " + advance, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 190);
+                //g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 210);
+                //g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 90, starty + offset + off + 250);
 
 
 
@@ -255,12 +268,12 @@ namespace Pokhreli.view_controller
             }
             if (billtype == "Table")
             {
-                 g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 140, starty + offset + off + 190);
-                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 50, starty + offset + off + 230);
+                 g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 500, starty + offset + off + 190);
+                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), startx + 450, starty + offset + off + 230);
 
 
-                   g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 190);
-                g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 90, starty + offset + off + 230);
+                //   g.DrawString("Final Total: Nrs " + final, new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 155, starty + offset + off + 190);
+                //g.DrawString("Recieved by: ...............................", new Font("Times New Roman", 12), new SolidBrush(Color.Black), offset2 + 90, starty + offset + off + 230);
 
             }
 
@@ -378,22 +391,64 @@ namespace Pokhreli.view_controller
 
         private async void bunifuThinButton22_Click(object sender, EventArgs e)
         {
-            tables.tableid = tableid;
-            Task<int> emptytables = new Task<int>(tables.emptytable);
-            emptytables.Start();
-          
-            be.billid = billno;
-            Task<int> updatebill = new Task<int>(be.checkoutbilling);
-            updatebill.Start();
-      
-            if (await emptytables == 1 && await updatebill==1)
+
+            if (billtype == "Table")
             {
-                MessageBox.Show("Checked out successfully");
+                tables.tableid = tableid;
+                Task<int> emptytables = new Task<int>(tables.emptytable);
+                emptytables.Start();
+
+                be.billid = billno;
+                Task<int> updatebill = new Task<int>(be.checkoutbilling);
+                updatebill.Start();
+
+                if (await emptytables == 1 && await updatebill == 1)
+                {
+                    MessageBox.Show("Checked out successfully");
+                }
+
+            }else if (billtype == "Room")
+            {
+                Task<bool> updateroomandbill = new Task<bool>(emptyRooms);
+                updateroomandbill.Start();
+                if(await updateroomandbill == true)
+                {
+                    MessageBox.Show("Checked out successfully");
+                }
             }
+        }
 
 
+        private bool emptyRooms()
+        {
+            be.billid = billno;
+            int res = be.checkoutbilling();
+
+            ge.entryId = tableid.ToString();
+            int resss = ge.guestentryBilled();
 
 
+            int j = 0;
+            room.billid = tableid.ToString();
+            DataTable allrooms = room.getallRoomsbookedTobill();
+            int rows = allrooms.Rows.Count;
+            for(int i=0;i<allrooms.Rows.Count; i++)
+            {
+                room.query = "update room set status='Empty', bookedTo='0' where id='" + allrooms.Rows[i]["id"].ToString() + "'";
+                int ress= room.insertroom();
+                if (ress== 1)
+                {
+                    j++;
+                }
+
+            }
+            if (j == allrooms.Rows.Count)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
     }
 }

@@ -137,6 +137,20 @@ namespace Pokhreli.view_controller
 
 
             }
+            else if (name == "Tables")
+            {
+
+
+                MyTables exp = new MyTables();
+                highliter.Top = bunifuTileButton9.Top;
+                exp.TopLevel = false;
+                panel4.Controls.Add(exp);
+                exp.Dock = DockStyle.Fill;
+                exp.Show();
+
+
+
+            }
 
             else
             {
@@ -202,6 +216,11 @@ namespace Pokhreli.view_controller
         {
             MyTables mt = new MyTables();
             mt.ShowDialog();
+        }
+
+        private void bunifuTileButton9_Click(object sender, EventArgs e)
+        {
+            loadpanel("Tables");
         }
     }
 }

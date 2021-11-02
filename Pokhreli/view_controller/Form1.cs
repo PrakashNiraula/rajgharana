@@ -91,8 +91,9 @@ namespace Pokhreli
 
             }catch(Exception ex)
             {
-                throw ex;
+                MessageBox.Show("Cannot connect to internet. Try again");
             }
+            return null;
 
             
 

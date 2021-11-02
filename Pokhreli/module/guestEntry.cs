@@ -64,6 +64,18 @@ namespace Pokhreli.module
             }
         }
 
+        //public int guestcheckout()
+        //{
+        //    try
+        //    {
+        //        return db.ExecuteQuery("update guestentry set status='Checked Out' where id='" + entryId + "'");
+
+        //    }catch(Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
 
 
         public DataTable getguestRecord()
