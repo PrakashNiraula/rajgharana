@@ -33,11 +33,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.View = new System.Windows.Forms.DataGridViewLinkColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.fordate = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.bunifuCustomLabel7 = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -86,6 +87,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.fordate);
             this.panel2.Controls.Add(this.dateTimePicker1);
@@ -96,6 +98,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(924, 147);
             this.panel2.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(714, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(143, 44);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Monthly Report";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // fordate
             // 
@@ -141,15 +153,15 @@
             this.bunifuCustomLabel7.TabIndex = 10;
             this.bunifuCustomLabel7.Text = "View";
             // 
-            // button1
+            // button2
             // 
-            this.button1.Location = new System.Drawing.Point(714, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 44);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Monthly Report";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button2.Location = new System.Drawing.Point(776, 114);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(81, 33);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Reload";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ViewData
             // 
@@ -182,5 +194,6 @@
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel7;
         private System.Windows.Forms.DataGridViewLinkColumn View;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

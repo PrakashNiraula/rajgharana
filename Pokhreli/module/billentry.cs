@@ -20,6 +20,15 @@ namespace Pokhreli.module
         public string billid;
         public float newamount;
         public string recentid;
+        public string recordid;
+
+        public string vat;
+        public string discount;
+        public string servicecharge;
+        public string priceaftercharges;
+
+
+
         public billentry()
         {
             db = new dbConnection();
@@ -114,8 +123,8 @@ namespace Pokhreli.module
         {
             try
             {
-                return db.ExecuteQuery("update guest_bill set status='Checked out' where id='" + billid + "'");
-
+                var res= db.ExecuteQuery("update guest_bill set status='Checked out',service_charge='"+servicecharge+"',discount='"+discount+"',vat='"+vat+"',finalRemaining='"+priceaftercharges+"' where id='" + billid + "'");
+                return res;
             }catch(Exception ex)
             {
                 throw ex;
@@ -147,6 +156,31 @@ namespace Pokhreli.module
             {
                 throw ex;
             }
+        }
+
+
+        public int deletebillcontent()
+        {
+
+
+            try
+            {
+
+                DataTable res2 = db.GetDataTable("select * from bill_content where id='" + recordid + "'");
+                string billid = res2.Rows[0]["bill_id"].ToString();
+                string total= res2.Rows[0]["total"].ToString();
+                var res3 = db.ExecuteQuery("update guest_bill set total=total-'" + float.Parse(total) + "',finalRemaining=finalRemaining-'" + float.Parse(total) + "' where id='" + billid + "'");
+                var res=db.ExecuteQuery("delete from bill_content where id='"+ recordid + "'");
+                if(res3==1 && res == 1)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+
         }
 
 

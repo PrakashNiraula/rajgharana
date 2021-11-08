@@ -131,7 +131,7 @@ namespace Pokhreli.view_controller
             comboBox1.DataSource = emptytables;
             comboBox1.DisplayMember = "table_no";
             comboBox1.ValueMember = "id";
-            comboBox1.SelectedIndex = 0;
+            //comboBox1.SelectedIndex = 0;
           
 
 
@@ -142,8 +142,10 @@ namespace Pokhreli.view_controller
         {
             records.Rows.Add(comboBox2.SelectedValue, records.Rows.Count + 1, comboBox2.Text, productrate, productquantity, labeltotal.Text);
             billtotal = billtotal + producttotal;
-            labelbilltotal.Text = billtotal.ToString();
 
+            labelbilltotal.Text = billtotal.ToString();
+            float final = billtotal - advance;
+            finaltotal.Text = final+"";
             vat = 0;
            
 
@@ -221,6 +223,9 @@ namespace Pokhreli.view_controller
             if (await savetodb == true)
             {
                 labelstatus.Text = "Successfully Saved";
+            }else
+            {
+                labelstatus.Text = "Error";
             }
 
 
@@ -294,7 +299,10 @@ namespace Pokhreli.view_controller
 
                     records.Rows.Add(dr);
                     billtotal = calculateTotal();
+                   
                     labelbilltotal.Text = billtotal.ToString();
+                   float final = billtotal - advance;
+                    finaltotal.Text = (final).ToString();
 
 
                 }
@@ -322,11 +330,13 @@ namespace Pokhreli.view_controller
         {
             if (radioButton1.Checked == true)
             {
+                bunifuThinButton22.ButtonText = "Save";
                 comboBox1.DataSource = guestList;
                 comboBox1.ValueMember = "id";
                 comboBox1.DisplayMember = "roomNumber";
                 bunifuCustomLabel20.Text = "Room no";
                 //bunifuMaterialTextbox2.Visible = false;
+                
                 comboBox1.Visible = true;
                 if (guestList.Rows.Count > 0)
                 {
@@ -353,16 +363,18 @@ namespace Pokhreli.view_controller
                         records.Rows.Add(dr);
                         billtotal = calculateTotal();
                         labelbilltotal.Text = billtotal.ToString();
+                        finaltotal.Text = (billtotal - advance).ToString();
                         
                     }
                 }
 
-
+                //bunifuMaterialTextbox3.Focus();
 
             }
 
             if (radioButton2.Checked == true)
             {
+                bunifuThinButton22.ButtonText = "Start";
                 bunifuMaterialTextbox1.Text = "";
                 bunifuCustomLabel20.Text = "Table no";
                 //bunifuMaterialTextbox2.Visible = false;
@@ -379,6 +391,7 @@ namespace Pokhreli.view_controller
                 labeladvance.Text = "0";
                 records.Rows.Clear();
                 labelbilltotal.Text = billtotal.ToString();
+                finaltotal.Text = "0";
                 bunifuMaterialTextbox1.Text = comboBox1.Text;
 
 
@@ -445,8 +458,15 @@ namespace Pokhreli.view_controller
 
             if (billtype == "Room")
             {
+                //if (finaltotal.Text== " ")
+                //{
+                //    bunifuMaterialTextbox3.Focus();
+                //    return false;
+                //}
 
-                be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','Ongoing " + number + "','"+guestentryId+"')";
+
+
+                be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','0','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','Ongoing " + number + "','"+guestentryId+"')";
                 int res = be.insertdata();
 
                 //add to bill_content and update amount
@@ -484,7 +504,7 @@ namespace Pokhreli.view_controller
             if (billtype == "Table")
             {
 
-                be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','Ongoing','"+tableid+"'); select last_insert_id();";
+                be.insertquery = "insert into guest_bill values('" + billid + "','" + bunifuMaterialTextbox1.Text + "','" + textBox1.Text + "','" + billtotal + "','" + servicecharge + "','" + vat + "','" + advance + "','0','" + finaltotal.Text + "','" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + billtype + "','Ongoing','"+tableid+"'); select last_insert_id();";
                 int res = be.insertdata();
 
                 //todo update selected table set status=filled

@@ -30,7 +30,7 @@ namespace Pokhreli.view_controller
             room = new module.Room();
             res = new DataTable();
             records = new DataTable();
-         
+            records.Columns.Add("record_id", typeof(string));
             records.Columns.Add("ID", typeof(string));
             records.Columns.Add("Particular", typeof(string));
             records.Columns.Add("Rate", typeof(string));
@@ -47,7 +47,7 @@ namespace Pokhreli.view_controller
             comboBox1.SelectedIndex = 0;
            be.date = DateTime.Now.ToString("yyyy-dd-MM");
             be.table = "guestentry";
-            dataGridView1.Columns[0].Visible = false;
+           // dataGridView1.Columns[0].Visible = true;
             
 
 
@@ -139,7 +139,7 @@ namespace Pokhreli.view_controller
             }
             if(table== "guest_bill")
             {
-                be.query = "select * from guest_bill where date='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'";
+                be.query = "select gb.id,gb.status,gb.guest_name,gb.total,gb.service_charge,gb.vat,gb.advance,gb.discount,gb.finalRemaining,gb.date,gb.billtype,gb.description,gb.tid from guest_bill gb where date='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "' order by status desc";
                 Task<DataTable> loadbill = new Task<DataTable>(be.getdata);
                 loadbill.Start();
                 res = await loadbill;
@@ -166,38 +166,59 @@ namespace Pokhreli.view_controller
 
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            DataTable res2=null ;
-            
-         
-            int billid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
-            string command = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            if (command.ToLower() == "view")
+            try
             {
-                DataRow dr = res.Rows[e.RowIndex];
-                //select mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id=21
-                be.query = "select mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id='" + billid + "'";
+                DataTable res2 = null;
 
 
-                Task<DataTable> getbillcontet = new Task<DataTable>(be.getdata);
-                getbillcontet.Start();
-               res2 = await getbillcontet;
-
-                for (int i = 0; i < res2.Rows.Count; i++)
+                int billid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                string command = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (command.ToLower() == "view")
                 {
+                    DataRow dr = res.Rows[e.RowIndex];
+                    //select mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id=21
+                    be.query = "select bct.id as record_id, mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id='" + billid + "'";
+                    Task<DataTable> getbillcontet = new Task<DataTable>(be.getdata);
+                    getbillcontet.Start();
+                    res2 = await getbillcontet;
 
-                    
+                    for (int i = 0; i < res2.Rows.Count; i++)
+                    {
+                        records.Rows.Add(res2.Rows[i]["record_id"].ToString(), (i + 1), res2.Rows[i]["name"].ToString(), res2.Rows[i]["rate"].ToString(), res2.Rows[i]["quantity"].ToString(), res2.Rows[i]["total"].ToString());
+                    }
 
-                    records.Rows.Add((i + 1), res2.Rows[i]["name"].ToString(), res2.Rows[i]["rate"].ToString(), res2.Rows[i]["quantity"].ToString(), res2.Rows[i]["total"].ToString());
+                    PrintBill pb = new PrintBill(records, dr["guest_name"].ToString(), dr["billtype"].ToString(), dr["description"].ToString(), dr["advance"].ToString(), dr["status"].ToString(), billid.ToString(), dr["service_charge"].ToString(), dr["vat"].ToString(), int.Parse(dr["tid"].ToString()), dr["discount"].ToString(), dr["total"].ToString());
+                    pb.ShowDialog();
+                    records.Clear();
+                    if (comboBox1.SelectedIndex == 2)
+                    {
+                        executequery("rooms", "");
+
+
+                    }
+                    else if (comboBox1.SelectedIndex == 0)
+                    {
+                        executequery("guestentry", DateTime.Now.ToString("yyyy-MM-dd"));
+                    }
+                    else if (comboBox1.SelectedIndex == 1)
+                    {
+
+                        executequery("guest_bill", DateTime.Now.ToString("yyyy-MM-dd"));
+                    }
+                    else if (comboBox1.SelectedIndex == 3)
+                    {
+
+                        executequery("purchase", DateTime.Now.ToString("yyyy-MM-dd"));
+                    }
 
 
                 }
-                
-                PrintBill pb = new PrintBill(records,dr["guest_name"].ToString(),dr["billtype"].ToString(),dr["description"].ToString(),dr["advance"].ToString(),dr["status"].ToString(),billid.ToString(),dr["service_charge"].ToString(),dr["vat"].ToString(), int.Parse(dr["tid"].ToString()));
-                pb.ShowDialog();
-                records.Clear();
-
+            }catch(Exception ex)
+            {
+               // throw ex;
             }
+
+           
 
 
         }
@@ -206,6 +227,30 @@ namespace Pokhreli.view_controller
         {
             MonthlyReport mr = new MonthlyReport();
             mr.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 2)
+            {
+                executequery("rooms", "");
+
+
+            }
+            else if (comboBox1.SelectedIndex == 0)
+            {
+                executequery("guestentry", DateTime.Now.ToString("yyyy-MM-dd"));
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+
+                executequery("guest_bill", DateTime.Now.ToString("yyyy-MM-dd"));
+            }
+            else if (comboBox1.SelectedIndex == 3)
+            {
+
+                executequery("purchase", DateTime.Now.ToString("yyyy-MM-dd"));
+            }
         }
     }
 }

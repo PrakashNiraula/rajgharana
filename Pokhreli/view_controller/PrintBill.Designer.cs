@@ -71,6 +71,8 @@
             this.bunifuCustomLabel8 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.labeldiscount = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuCustomLabel5 = new Bunifu.Framework.UI.BunifuCustomLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -111,6 +113,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(858, 321);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Delete
             // 
@@ -147,6 +150,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.labeldiscount);
+            this.panel2.Controls.Add(this.bunifuCustomLabel5);
             this.panel2.Controls.Add(this.labelstatus);
             this.panel2.Controls.Add(this.bunifuThinButton22);
             this.panel2.Controls.Add(this.panel3);
@@ -445,7 +450,7 @@
             // 
             this.finaltotal.AutoSize = true;
             this.finaltotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.finaltotal.Location = new System.Drawing.Point(811, 704);
+            this.finaltotal.Location = new System.Drawing.Point(818, 735);
             this.finaltotal.Name = "finaltotal";
             this.finaltotal.Size = new System.Drawing.Size(18, 20);
             this.finaltotal.TabIndex = 25;
@@ -455,7 +460,7 @@
             // 
             this.bunifuCustomLabel18.AutoSize = true;
             this.bunifuCustomLabel18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel18.Location = new System.Drawing.Point(650, 706);
+            this.bunifuCustomLabel18.Location = new System.Drawing.Point(657, 737);
             this.bunifuCustomLabel18.Name = "bunifuCustomLabel18";
             this.bunifuCustomLabel18.Size = new System.Drawing.Size(110, 18);
             this.bunifuCustomLabel18.TabIndex = 24;
@@ -534,7 +539,7 @@
             // 
             this.bunifuCustomLabel11.AutoSize = true;
             this.bunifuCustomLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel11.Location = new System.Drawing.Point(709, 650);
+            this.bunifuCustomLabel11.Location = new System.Drawing.Point(720, 650);
             this.bunifuCustomLabel11.Name = "bunifuCustomLabel11";
             this.bunifuCustomLabel11.Size = new System.Drawing.Size(59, 15);
             this.bunifuCustomLabel11.TabIndex = 13;
@@ -544,11 +549,11 @@
             // 
             this.bunifuCustomLabel10.AutoSize = true;
             this.bunifuCustomLabel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel10.Location = new System.Drawing.Point(709, 623);
+            this.bunifuCustomLabel10.Location = new System.Drawing.Point(720, 623);
             this.bunifuCustomLabel10.Name = "bunifuCustomLabel10";
-            this.bunifuCustomLabel10.Size = new System.Drawing.Size(70, 15);
+            this.bunifuCustomLabel10.Size = new System.Drawing.Size(56, 15);
             this.bunifuCustomLabel10.TabIndex = 12;
-            this.bunifuCustomLabel10.Text = "Vat(in Nrs) :";
+            this.bunifuCustomLabel10.Text = "Vat(in %)";
             // 
             // bunifuCustomLabel9
             // 
@@ -588,6 +593,26 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(858, 321);
             this.panel4.TabIndex = 0;
+            // 
+            // labeldiscount
+            // 
+            this.labeldiscount.AutoSize = true;
+            this.labeldiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeldiscount.Location = new System.Drawing.Point(812, 709);
+            this.labeldiscount.Name = "labeldiscount";
+            this.labeldiscount.Size = new System.Drawing.Size(14, 15);
+            this.labeldiscount.TabIndex = 41;
+            this.labeldiscount.Text = "0";
+            // 
+            // bunifuCustomLabel5
+            // 
+            this.bunifuCustomLabel5.AutoSize = true;
+            this.bunifuCustomLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel5.Location = new System.Drawing.Point(692, 709);
+            this.bunifuCustomLabel5.Name = "bunifuCustomLabel5";
+            this.bunifuCustomLabel5.Size = new System.Drawing.Size(87, 15);
+            this.bunifuCustomLabel5.TabIndex = 40;
+            this.bunifuCustomLabel5.Text = "Discount(in %)";
             // 
             // PrintBill
             // 
@@ -657,5 +682,7 @@
         private Bunifu.Framework.UI.BunifuThinButton2 bunifuThinButton22;
         private System.Windows.Forms.DataGridViewLinkColumn Delete;
         private System.Windows.Forms.Label labelstatus;
+        private Bunifu.Framework.UI.BunifuCustomLabel labeldiscount;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel5;
     }
 }

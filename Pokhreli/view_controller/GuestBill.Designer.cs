@@ -200,6 +200,7 @@
             this.bunifuMaterialTextbox3.Size = new System.Drawing.Size(90, 33);
             this.bunifuMaterialTextbox3.TabIndex = 37;
             this.bunifuMaterialTextbox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.bunifuMaterialTextbox3.Visible = false;
             this.bunifuMaterialTextbox3.OnValueChanged += new System.EventHandler(this.bunifuMaterialTextbox3_OnValueChanged);
             // 
             // radioButton2
@@ -338,6 +339,7 @@
             this.bunifuMaterialTextbox4.Size = new System.Drawing.Size(112, 34);
             this.bunifuMaterialTextbox4.TabIndex = 23;
             this.bunifuMaterialTextbox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.bunifuMaterialTextbox4.Visible = false;
             this.bunifuMaterialTextbox4.OnValueChanged += new System.EventHandler(this.bunifuMaterialTextbox4_OnValueChanged);
             // 
             // labelbilltotal

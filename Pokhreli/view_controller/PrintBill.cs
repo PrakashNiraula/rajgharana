@@ -29,6 +29,11 @@ namespace Pokhreli.view_controller
        float producttotal = 0;
         float productrate = 1;
         int productid;
+        string totalforproduct;
+        
+
+        string discount="0";
+
 
 
 
@@ -41,7 +46,7 @@ namespace Pokhreli.view_controller
         module.Room room;
         module.guestEntry ge;
 
-        public PrintBill(DataTable products,string name,string billtype,string description,string advance,string number,string billno,string servicecharge,string vat,int tableid)
+        public PrintBill(DataTable products,string name,string billtype,string description,string advance,string number,string billno,string servicecharge,string vat,int tableid,string discount,string producttotal)
         {
             InitializeComponent();
             this.products = products;
@@ -54,6 +59,11 @@ namespace Pokhreli.view_controller
             this.servicecharge = servicecharge;
             this.vat = vat;
             this.tableid = tableid;
+            this.discount = discount;
+            this.totalforproduct = producttotal;
+           
+
+
             panel3.Visible = false;
             mp = new module.myProducts();
             be = new module.billentry();
@@ -78,9 +88,12 @@ namespace Pokhreli.view_controller
             lblcusname.Text = name;
             textBox1.Text = description;
             labeladvance.Text = advance;
+            labeldiscount.Text = discount;
             dataGridView1.DataSource = products;
+
             lblbillno.Text = "Bill no: A" + billno;
-           // bunifuCustomLabel3.Text = panorvat;
+            // bunifuCustomLabel3.Text = panorvat;
+            //labelbilltotal.Text;
             calculatetotal();
 
 
@@ -96,12 +109,16 @@ namespace Pokhreli.view_controller
             comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
 
 
+            labelbilltotal.Text = totalforproduct;
+
+
 
             labelstatus.Text = "Status: " + number;
             if(number=="Checked out")
             {
                 bunifuThinButton22.Visible = false;
                 bunifuThinButton21.Visible = false;
+                dataGridView1.Columns[0].Visible = false;
             }
 
 
@@ -109,19 +126,25 @@ namespace Pokhreli.view_controller
 
         public void calculatetotal()
         {
-            total = 0;
+            producttotal = 0;
 
             if (products.Rows.Count > 0)
             {
                 for (int i = 0; i < products.Rows.Count; i++)
                 {
-                    total = total + float.Parse(products.Rows[i]["Total"].ToString());
+                    producttotal = producttotal + float.Parse(products.Rows[i]["Total"].ToString());
+                    products.Rows[i]["ID"] = (i+1).ToString();
+
                 }
                 labelbilltotal.Text = total + "";
+                labeldiscount.Text = discount + "";
                 labelwithvat.Text = vat.ToString();
                 labelservice.Text = servicecharge.ToString();
-                final = total + float.Parse(vat) + float.Parse(servicecharge) - float.Parse(advance);
-                finaltotal.Text = final + "";
+               final = producttotal + float.Parse(vat) * producttotal / 100 + float.Parse(servicecharge) * producttotal / 100 - float.Parse(discount) * producttotal / 100 - float.Parse(advance);
+
+                labelbilltotal.Text = final + "";
+               // final = total + float.Parse(vat) + float.Parse(servicecharge) - float.Parse(advance);
+                 finaltotal.Text = final + "";
             }
          
         }
@@ -330,16 +353,19 @@ namespace Pokhreli.view_controller
 
                 int res = be.updatebill();
 
-                be.query = "select mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id='" + billno + "'";
+                be.query = "select bct.id as record_id,mp.name,bct.quantity,bct.rate,bct.total from myproducts mp,bill_content bct, guest_bill gb where bct.bill_id=gb.id and mp.id=bct.product_id and bct.bill_id='" + billno + "'";
 
 
-                //Task<DataTable> getbillcontet = new Task<DataTable>(be.getdata);
-                //getbillcontet.Start();
-                //products = await getbillcontet;
+                var resss = be.getdata();
+                products.Rows.Clear();
+                for (int i = 0; i < resss.Rows.Count; i++)
+                {
+                    products.Rows.Add(resss.Rows[i]["record_id"].ToString(), (i + 1), resss.Rows[i]["name"].ToString(), resss.Rows[i]["rate"].ToString(), resss.Rows[i]["quantity"].ToString(), resss.Rows[i]["total"].ToString());
+                }
 
-                products = be.getdata();
-               
-            }catch(Exception ex)
+
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }
@@ -392,63 +418,84 @@ namespace Pokhreli.view_controller
         private async void bunifuThinButton22_Click(object sender, EventArgs e)
         {
 
-            if (billtype == "Table")
-            {
-                tables.tableid = tableid;
-                Task<int> emptytables = new Task<int>(tables.emptytable);
-                emptytables.Start();
 
-                be.billid = billno;
-                Task<int> updatebill = new Task<int>(be.checkoutbilling);
-                updatebill.Start();
 
-                if (await emptytables == 1 && await updatebill == 1)
-                {
-                    MessageBox.Show("Checked out successfully");
-                }
+            Checkout chk = new Checkout(final,billtype,billno,tableid+"");
+           // chk.productTotal = labelbilltotal.Text;
+            chk.billid = billno;
+            chk.billtype = billtype;
+            chk.ShowDialog();
+            bunifuThinButton22.Visible = false;
+            dataGridView1.Columns[0].Visible = false;
 
-            }else if (billtype == "Room")
-            {
-                Task<bool> updateroomandbill = new Task<bool>(emptyRooms);
-                updateroomandbill.Start();
-                if(await updateroomandbill == true)
-                {
-                    MessageBox.Show("Checked out successfully");
-                }
-            }
+
+
+
+
+
+
+
+            //if (billtype == "Table")
+            //{
+            //    tables.tableid = tableid;
+            //    Task<int> emptytables = new Task<int>(tables.emptytable);
+            //    emptytables.Start();
+
+            //    be.billid = billno;
+            //    Task<int> updatebill = new Task<int>(be.checkoutbilling);
+            //    updatebill.Start();
+
+            //    if (await emptytables == 1 && await updatebill == 1)
+            //    {
+            //        MessageBox.Show("Checked out successfully");
+            //    }
+
+            //}else if (billtype == "Room")
+            //{
+            //    Task<bool> updateroomandbill = new Task<bool>(emptyRooms);
+            //    updateroomandbill.Start();
+            //    if(await updateroomandbill == true)
+            //    {
+            //        MessageBox.Show("Checked out successfully");
+            //    }
+            //}
         }
 
 
-        private bool emptyRooms()
+       
+
+        private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            be.billid = billno;
-            int res = be.checkoutbilling();
 
-            ge.entryId = tableid.ToString();
-            int resss = ge.guestentryBilled();
+           // int billid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+            string command = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-
-            int j = 0;
-            room.billid = tableid.ToString();
-            DataTable allrooms = room.getallRoomsbookedTobill();
-            int rows = allrooms.Rows.Count;
-            for(int i=0;i<allrooms.Rows.Count; i++)
+            if (command.ToLower() == "delete")
             {
-                room.query = "update room set status='Empty', bookedTo='0' where id='" + allrooms.Rows[i]["id"].ToString() + "'";
-                int ress= room.insertroom();
-                if (ress== 1)
+               string recordid=be.recordid = products.Rows[e.RowIndex]["record_id"].ToString();
+
+                Task<int> deleterecord = new Task<int>(be.deletebillcontent);
+                deleterecord.Start();
+                var res = await deleterecord;
+                if(res == 1)
                 {
-                    j++;
+                    for (int i = products.Rows.Count - 1; i >= 0; i--)
+                    {
+                        DataRow dr = products.Rows[i];
+                        if (int.Parse(dr["record_id"].ToString()) == int.Parse(recordid))
+                        {
+                            dr.Delete();
+                        }
+                        products.AcceptChanges();
+
+
+                    }
+                    calculatetotal();
+
                 }
 
             }
-            if (j == allrooms.Rows.Count)
-            {
-                return true;
-            }else
-            {
-                return false;
-            }
+
         }
     }
 }
