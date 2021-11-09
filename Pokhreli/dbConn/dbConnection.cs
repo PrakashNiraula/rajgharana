@@ -17,7 +17,9 @@ namespace Pokhreli.dbConn
         public dbConnection()
         {
          conn = new MySqlConnection("server = database-1.cmn2hbmgvegk.ap-south-1.rds.amazonaws.com; user id= admin; password =#pvug209y; database = rajgharana; persistsecurityinfo = False;");
-           // conn = new MySqlConnection("server = localhost; user id= root; password =; database = hotel_pokhreli; persistsecurityinfo = False;");
+            // conn = new MySqlConnection("server = localhost; user id= root; password =; database = hotel_pokhreli; persistsecurityinfo = False;");
+           // conn = new MySqlConnection("server = database-1.cmn2hbmgvegk.ap-south-1.rds.amazonaws.com; user id= admin; password =#pvug209y; database = demo_hotel; persistsecurityinfo = False;");
+
 
         }
 

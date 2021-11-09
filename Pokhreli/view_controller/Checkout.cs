@@ -130,7 +130,14 @@ namespace Pokhreli.view_controller
 
         public void calculatetotal()
         {
-           priceaftercharges = producttotal - ((producttotal * discountinpercentage) / 100) + ((producttotal * vatinpercentage) / 100) + ((producttotal * servicechargeinpercentage) / 100);
+            //  priceaftercharges = producttotal - ((producttotal * discountinpercentage) / 100) + ((producttotal * vatinpercentage) / 100) + ((producttotal * servicechargeinpercentage) / 100);
+            // priceaftercharges = (producttotal - (producttotal * discountinpercentage / 100)+ (producttotal * discountinpercentage / 100));
+            float disc = producttotal * discountinpercentage / 100;
+            float pricewithdisc = producttotal - disc;
+            float pricewithdiscandservice = pricewithdisc+(pricewithdisc* servicechargeinpercentage / 100);
+            priceaftercharges = pricewithdiscandservice + (pricewithdiscandservice * vatinpercentage / 100);
+            //priceaftercharges=
+
             labelaftercharges.Text = priceaftercharges.ToString();
 
 
